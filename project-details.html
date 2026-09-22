@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Project Documentation | Boddu Pavankalyan</title>
+  <meta name="description" content="Detailed engineering documentation, system architecture, database schema, and API specifications for Boddu Pavankalyan's projects." />
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/avatar.svg" type="image/svg+xml" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="index.html" class="brand">
+      <div class="logo">BP</div>
+      <div class="brand-text">
+        <div class="name">Boddu Pavankalyan</div>
+        <div class="title">Engineering Portfolio &amp; System Docs</div>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle light and dark theme" title="Switch Theme">
+        <span class="theme-toggle-icon icon-sun" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </span>
+        <span class="theme-toggle-icon icon-moon" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
+      </button>
+      <a href="index.html#projects" class="btn btn-secondary btn-sm">
+        <span>← All Projects</span>
+      </a>
+      <button class="btn btn-book btn-sm" onclick="openBookingModal()">
+        <span>⚡ Book a Project</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 30px;">
+    <!-- Back Navigation -->
+    <a href="index.html#projects" class="back-link">
+      <span>← Back to All Projects</span>
+    </a>
+
+    <!-- Loading Placeholder -->
+    <div id="loadingState" style="text-align: center; padding: 60px 0;">
+      <div style="display: inline-block; width: 40px; height: 40px; border: 3px solid rgba(59,130,246,0.3); border-radius: 50%; border-top-color: #3b82f6; animation: spin 1s linear infinite;"></div>
+      <p style="margin-top: 16px; color: var(--text-muted);">Loading complete project documentation...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" style="display: none; text-align: center; padding: 60px 0;">
+      <h2 style="color: #ef4444; font-family: var(--font-heading); margin-bottom: 12px;">Project Not Found</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px;">The requested project document could not be located.</p>
+      <a href="index.html#projects" class="btn btn-primary">Return to Projects</a>
+    </div>
+
+    <!-- Main Project Content (populated via JS) -->
+    <article id="projectContent" style="display: none;">
+      <!-- Header / Banner -->
+      <header class="doc-header">
+        <div class="doc-title-row">
+          <div>
+            <span class="card-category" id="docCategory">Full-Stack Development</span>
+            <h1 id="docTitle" style="margin-top: 12px;">Project Title</h1>
+            <p id="docSubtitle" style="color: var(--accent-cyan); font-size: 1.2rem; margin-top: 6px;">Project Subtitle</p>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <button class="btn btn-book" id="bookThisProjectBtn">
+              <span>🚀 Book Similar Project</span>
+            </button>
+            <a href="https://github.com/Bpavan124" target="_blank" rel="noopener" class="btn btn-secondary" id="docGithubBtn">
+              <span>GitHub Repository ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="doc-meta-bar">
+          <div class="doc-meta-item">
+            <span>Role:</span> <strong id="docRole">Lead Engineer</strong>
+          </div>
+          <div class="doc-meta-item">
+            <span>Timeline:</span> <strong id="docTimeline">3 Months</strong>
+          </div>
+          <div class="doc-meta-item">
+            <span>Core Focus:</span> <strong id="docFocus">Architecture &amp; Performance</strong>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <div style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 8px;">Technologies Utilized</div>
+          <div class="tech-pills" id="docTechStack"></div>
+        </div>
+      </header>
+
+      <!-- High-Level Key Performance Metrics -->
+      <section class="metrics-row" id="docMetrics"></section>
+
+      <!-- 1. Executive Summary & Problem -->
+      <section class="doc-card">
+        <h3><span>📋</span> Executive Overview &amp; Context</h3>
+        <p id="docOverview"></p>
+        <h4 style="color: #cbd5e1; font-size: 1.1rem; margin: 20px 0 8px;">The Problem &amp; Business Need</h4>
+        <p id="docProblemStatement"></p>
+      </section>
+
+      <!-- 2. System Architecture & Workflow -->
+      <section class="doc-card">
+        <h3><span>🏗️</span> System Architecture &amp; Data Pipeline</h3>
+        <div id="docArchitecture" style="color: var(--text-muted); line-height: 1.8; white-space: pre-line;"></div>
+      </section>
+
+      <!-- 3. Key Functional Features -->
+      <section class="doc-card">
+        <h3><span>✨</span> Core Features &amp; Capabilities</h3>
+        <ul id="docKeyFeatures" style="list-style-type: none; display: flex; flex-direction: column; gap: 12px; padding-left: 0;"></ul>
+      </section>
+
+      <!-- 4. Database Schema & Data Models -->
+      <section class="doc-card">
+        <h3><span>🗄️</span> Database Schema &amp; Storage Architecture</h3>
+        <p>Normalized entities, primary key indexing, and relational relationships implemented in this system:</p>
+        <div class="table-responsive">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Table / Model</th>
+                <th>Primary Key / Index</th>
+                <th>Key Columns / Attributes</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="docSchemaTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. RESTful API Endpoints -->
+      <section class="doc-card">
+        <h3><span>📡</span> RESTful API Specifications &amp; Interface</h3>
+        <p>Standardized API routes, query handlers, and administrative interfaces:</p>
+        <div class="table-responsive">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th style="width: 100px;">Method</th>
+                <th style="width: 260px;">Endpoint Path</th>
+                <th>Action / Description</th>
+              </tr>
+            </thead>
+            <tbody id="docApiTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 6. Engineering Challenges & Solutions -->
+      <section class="doc-card">
+        <h3><span>💡</span> Critical Engineering Challenges &amp; Solutions</h3>
+        <div id="docChallenges"></div>
+      </section>
+
+      <!-- Bottom Call To Action -->
+      <div class="booking-banner" style="margin-top: 40px;">
+        <div>
+          <h3>Interested in building a similar system?</h3>
+          <p>Whether you need high-speed relational schemas, secure REST APIs, automated DevOps, or AI intelligence for your business, let's collaborate.</p>
+          <div class="booking-perks">
+            <div class="perk-item"><span class="perk-icon">✓</span> Direct Developer Contact</div>
+            <div class="perk-item"><span class="perk-icon">✓</span> Free Architecture Assessment</div>
+            <div class="perk-item"><span class="perk-icon">✓</span> Customized Deliverables</div>
+          </div>
+        </div>
+        <div class="booking-cta">
+          <button class="btn btn-book" style="padding: 14px 28px; font-size: 1.05rem;" id="bottomBookBtn">
+            <span>⚡ Book a Project With Me</span>
+          </button>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- ==========================================================================
+       "Book a Project" Native Modal Dialog
+       ========================================================================== -->
+  <dialog id="bookingModal" class="booking-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><span>🚀</span> Book a Project / Submit Requirements</h3>
+        <button type="button" class="modal-close" onclick="closeBookingModal()" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="bookingForm">
+        <div class="modal-body">
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">
+            Fill in your project goals and requirements below. Your details will be formatted and <strong>automatically sent directly to Boddu Pavankalyan's email</strong> (<a href="mailto:bpavanqwe@gmail.com" style="color: var(--primary);">bpavanqwe@gmail.com</a>), and you will receive a confirmation receipt.
+          </p>
+
+          <span class="form-section-title">1. Client &amp; Contact Details</span>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="clientName">Full Name *</label>
+              <input type="text" id="clientName" name="clientName" placeholder="e.g. Sarah Connor" required />
+            </div>
+            <div class="form-group">
+              <label for="clientEmail">Email Address *</label>
+              <input type="email" id="clientEmail" name="clientEmail" placeholder="e.g. sarah@company.com" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="clientPhone">Phone / WhatsApp</label>
+              <input type="tel" id="clientPhone" name="clientPhone" placeholder="+91 98765 43210" />
+            </div>
+            <div class="form-group">
+              <label for="company">Company / Organization</label>
+              <input type="text" id="company" name="company" placeholder="e.g. TechCorp / Freelance" />
+            </div>
+          </div>
+
+          <span class="form-section-title">2. Project Scope &amp; Preferences</span>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="projectType">Service / Project Category *</label>
+              <select id="projectType" name="projectType" required>
+                <option value="Full-Stack Web Application">Full-Stack Web Application (Node + Frontend)</option>
+                <option value="Backend REST API & Architecture">Backend REST API &amp; Architecture</option>
+                <option value="Database Design & Query Optimization">Database Design &amp; Query Optimization (MySQL/MongoDB)</option>
+                <option value="Data Analytics & Python Dashboards">Data Analytics &amp; Python Dashboards</option>
+                <option value="AI / ML Diagnostics Solution">AI / ML Diagnostics Solution</option>
+                <option value="DevOps & Environment Automation">DevOps &amp; Environment Automation</option>
+                <option value="Other Custom Project">Other Custom Software</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="timeline">Expected Timeline</label>
+              <select id="timeline" name="timeline">
+                <option value="Urgent (< 2 weeks)">Urgent (&lt; 2 weeks)</option>
+                <option value="Standard (2 - 4 weeks)" selected>Standard (2 - 4 weeks)</option>
+                <option value="1 - 3 months">1 - 3 months</option>
+                <option value="Flexible / Ongoing">Flexible / Ongoing</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="estimatedBudget">Estimated Budget Range</label>
+              <select id="estimatedBudget" name="estimatedBudget">
+                <option value="Under $500 / ₹40,000">Under $500 / ₹40,000</option>
+                <option value="$500 - $1,500 / ₹40k - ₹1.2L" selected>$500 - $1,500 / ₹40,000 - ₹1,20,000</option>
+                <option value="$1,500 - $3,500 / ₹1.2L - ₹3L">$1,500 - $3,500 / ₹1,20,000 - ₹3,00,000</option>
+                <option value="$3,500+ / Custom Enterprise">$3,500+ / Enterprise</option>
+                <option value="To Be Discussed">To Be Discussed</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="deadline">Target Launch Date</label>
+              <input type="date" id="deadline" name="deadline" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="techPreferences">Preferred Technologies / Frameworks (Optional)</label>
+            <input type="text" id="techPreferences" name="techPreferences" placeholder="e.g. Node.js, Express, MySQL, React, Python" />
+          </div>
+
+          <span class="form-section-title">3. Detailed Project Requirements *</span>
+          <div class="form-group">
+            <label for="projectRequirements">Describe Your Requirements, Features, and Goals *</label>
+            <textarea id="projectRequirements" name="projectRequirements" rows="5" placeholder="Please describe what you want built: key user roles, required API endpoints, database needs, third-party integrations, or reference links..." required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeBookingModal()">Cancel</button>
+          <button type="submit" class="btn btn-book" id="bookingSubmitBtn">
+            <span>🚀 Submit Project Requirements</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Boddu Pavankalyan. All rights reserved. | Full-stack Developer &amp; Backend Architect</p>
+  </footer>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <script src="script.js"></script>
+</body>
+</html>

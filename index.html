@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boddu Pavankalyan | Full-Stack Developer & Backend Architect</title>
+  <meta name="description" content="Portfolio of Boddu Pavankalyan - Full-stack Developer, Node.js & Python engineer, specializing in scalable web systems, database design, and data analytics." />
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/avatar.svg" type="image/svg+xml" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="#about" class="brand">
+      <div class="logo">BP</div>
+      <div class="brand-text">
+        <div class="name">Boddu Pavankalyan</div>
+        <div class="title">Full‑stack Developer &amp; Backend Architect</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects &amp; Docs</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle light and dark theme" title="Switch Theme">
+        <span class="theme-toggle-icon icon-sun" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </span>
+        <span class="theme-toggle-icon icon-moon" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
+      </button>
+      <button class="btn btn-book" id="openBookModalBtn">
+        <span>⚡ Book a Project</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="about" class="hero">
+      <div class="hero-text">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>Available for Freelance & Full-Stack Projects</span>
+        </div>
+        <h1>
+          Building <span class="text-gradient">High-Performance</span> Web Apps & Backend Systems.
+        </h1>
+        <p class="subtitle">Full‑stack Developer | Data & Backend Enthusiast — based in India.</p>
+        <p class="about">
+          I design and engineer reliable, production-grade applications. My expertise spans Node.js & Express REST APIs, MySQL/MongoDB relational & document databases, Python data visualization pipelines, and AI-in-Healthcare research frameworks.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-book" onclick="openBookingModal()">
+            <span>🚀 Book a Project</span>
+          </button>
+          <a href="#projects" class="btn btn-primary">
+            <span>Explore Case Studies</span>
+          </a>
+          <a href="mailto:bpavanqwe@gmail.com" class="btn btn-secondary">
+            <span>Contact Me</span>
+          </a>
+        </div>
+        <div class="quick-stats">
+          <div class="stat-item">
+            <div class="stat-value">4+</div>
+            <div class="stat-label">Full Case Studies</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">&lt;50ms</div>
+            <div class="stat-label">Query Optimization</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Production Delivery</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="avatar-wrapper">
+          <div class="avatar-card">
+            <img src="assets/avatar.svg" alt="Boddu Pavankalyan" class="profile-img" onerror="this.onerror=null; this.src='assets/avatar.svg';" />
+            <div class="avatar-badge">
+              <span>💻 Boddu Pavankalyan</span>
+            </div>
+          </div>
+          <div class="floating-badge badge-top-right">
+            ⚡ REST APIs & MySQL
+          </div>
+          <div class="floating-badge badge-bottom-left">
+            🐍 Python & Data Analysis
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="container">
+      <div class="section-header">
+        <span class="section-tag">Case Studies & Architecture</span>
+        <h2>Featured Engineering Projects</h2>
+        <p>Click any project card to inspect the <strong>complete system documentation</strong>, database ER schemas, API endpoints, and implementation details.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+        <button class="filter-btn" data-filter="devops">DevOps & Backend</button>
+        <button class="filter-btn" data-filter="ai">AI & Diagnostics</button>
+        <button class="filter-btn" data-filter="data">Data & Analytics</button>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="projects-grid" id="projectsContainer">
+        <!-- Project 1: Student Management -->
+        <article class="project-card" data-category="fullstack">
+          <div>
+            <div class="card-header">
+              <div class="card-icon">🎓</div>
+              <span class="card-category">Full-Stack</span>
+            </div>
+            <div class="card-body">
+              <h3>Student Management System</h3>
+              <span class="card-tag">MySQL + Node.js + Express + JWT</span>
+              <p>Built CRUD APIs and a secure admin/faculty UI to manage student records, course enrollment, and automated GPA calculations with ACID transaction safety.</p>
+              <div class="tech-pills">
+                <span class="tech-pill">Node.js</span>
+                <span class="tech-pill">Express</span>
+                <span class="tech-pill">MySQL</span>
+                <span class="tech-pill">JWT Auth</span>
+                <span class="tech-pill">RBAC</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="project-details.html?id=student-management" class="btn-doc">
+              <span>View Complete Document ↗</span>
+            </a>
+            <button class="btn-book-quick" onclick="openBookingModal('Student & Faculty Management Platform')">
+              <span>Book Similar →</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 2: MongoDB Setup -->
+        <article class="project-card" data-category="devops">
+          <div>
+            <div class="card-header">
+              <div class="card-icon">⚡</div>
+              <span class="card-category">DevOps & Automation</span>
+            </div>
+            <div class="card-body">
+              <h3>MongoDB Shell Automation</h3>
+              <span class="card-tag">mongosh + Windows DevOps + PowerShell</span>
+              <p>Engineered automation scripts and configuration tooling to install, configure PATH variables, manage replica clusters, and schedule automated backups on Windows.</p>
+              <div class="tech-pills">
+                <span class="tech-pill">MongoDB</span>
+                <span class="tech-pill">PowerShell</span>
+                <span class="tech-pill">Windows API</span>
+                <span class="tech-pill">Replica Sets</span>
+                <span class="tech-pill">Automation</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="project-details.html?id=mongodb-shell-setup" class="btn-doc">
+              <span>View Complete Document ↗</span>
+            </a>
+            <button class="btn-book-quick" onclick="openBookingModal('MongoDB Infrastructure & DevOps Setup')">
+              <span>Book Similar →</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 3: AI in Healthcare -->
+        <article class="project-card" data-category="ai">
+          <div>
+            <div class="card-header">
+              <div class="card-icon">🩺</div>
+              <span class="card-category">AI & Data Science</span>
+            </div>
+            <div class="card-body">
+              <h3>AI in Healthcare Diagnostics</h3>
+              <span class="card-tag">Deep Learning + Python + Medical Imaging</span>
+              <p>In-depth research and clinical framework evaluating convolutional networks for diagnostic imaging, EHR predictive risk models, and HIPAA-compliant explainable AI (XAI).</p>
+              <div class="tech-pills">
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">TensorFlow</span>
+                <span class="tech-pill">Grad-CAM</span>
+                <span class="tech-pill">Medical Imaging</span>
+                <span class="tech-pill">Healthcare AI</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="project-details.html?id=ai-in-healthcare" class="btn-doc">
+              <span>View Complete Document ↗</span>
+            </a>
+            <button class="btn-book-quick" onclick="openBookingModal('AI Healthcare / Machine Learning Project')">
+              <span>Book Similar →</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 4: Data Visualization -->
+        <article class="project-card" data-category="data">
+          <div>
+            <div class="card-header">
+              <div class="card-icon">📊</div>
+              <span class="card-category">Data Analytics</span>
+            </div>
+            <div class="card-body">
+              <h3>Data Visualization Engine</h3>
+              <span class="card-tag">Python + Pandas + Matplotlib + Seaborn</span>
+              <p>Automated exploratory data analysis (EDA) pipeline converting messy multi-thousand row datasets into interactive statistical dashboards and KPI charts.</p>
+              <div class="tech-pills">
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">Pandas</span>
+                <span class="tech-pill">NumPy</span>
+                <span class="tech-pill">Matplotlib</span>
+                <span class="tech-pill">Seaborn</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="project-details.html?id=data-visualization" class="btn-doc">
+              <span>View Complete Document ↗</span>
+            </a>
+            <button class="btn-book-quick" onclick="openBookingModal('Data Visualization & Analytics Dashboard')">
+              <span>Book Similar →</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="container">
+      <div class="section-header">
+        <span class="section-tag">Core Competencies</span>
+        <h2>Technical Skills & Stack</h2>
+        <p>A comprehensive toolkit designed for reliable backend architecture and modern web experiences.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3><span>⚙️</span> Backend & APIs</h3>
+          <div class="skill-list">
+            <div class="skill-item">
+              <span class="skill-name">Node.js / Express</span>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">RESTful API Design</span>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">JWT & Auth Systems</span>
+              <span class="skill-level">Proficient</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Python Scripting</span>
+              <span class="skill-level">Proficient</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3><span>🗄️</span> Databases & Storage</h3>
+          <div class="skill-list">
+            <div class="skill-item">
+              <span class="skill-name">MySQL (Schema Design)</span>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">MongoDB & mongosh</span>
+              <span class="skill-level">Proficient</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">ACID Transactions</span>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Query Optimization</span>
+              <span class="skill-level">Advanced</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3><span>📈</span> Data Science & AI</h3>
+          <div class="skill-list">
+            <div class="skill-item">
+              <span class="skill-name">Pandas & NumPy</span>
+              <span class="skill-level">Proficient</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Matplotlib & Seaborn</span>
+              <span class="skill-level">Proficient</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Healthcare AI Models</span>
+              <span class="skill-level">Specialist</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Data Cleaning / EDA</span>
+              <span class="skill-level">Advanced</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3><span>🌐</span> Frontend & Tools</h3>
+          <div class="skill-list">
+            <div class="skill-item">
+              <span class="skill-name">JavaScript (ES6+)</span>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Modern HTML5 & CSS3</span>
+              <span class="skill-level">Advanced</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">React Fundamentals</span>
+              <span class="skill-level">Intermediate</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Git & PowerShell Automation</span>
+              <span class="skill-level">Proficient</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Booking Banner -->
+    <section class="container">
+      <div class="booking-banner">
+        <div>
+          <h3>Have an idea or need a project built?</h3>
+          <p>Book a dedicated project consultation. Share your requirements, timeline, and tech preferences—and I'll provide a comprehensive architecture plan and quote within 24 hours.</p>
+          <div class="booking-perks">
+            <div class="perk-item">
+              <span class="perk-icon">✓</span>
+              <span>Direct Requirements Review</span>
+            </div>
+            <div class="perk-item">
+              <span class="perk-icon">✓</span>
+              <span>Email Confirmation to Your Inbox</span>
+            </div>
+            <div class="perk-item">
+              <span class="perk-icon">✓</span>
+              <span>Fast 24-Hour Response</span>
+            </div>
+          </div>
+        </div>
+        <div class="booking-cta">
+          <button class="btn btn-book" style="padding: 14px 28px; font-size: 1.05rem;" onclick="openBookingModal()">
+            <span>⚡ Book a Project Now</span>
+          </button>
+          <span style="font-size: 0.82rem; color: var(--text-dim);">No upfront commitment required</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- General Contact Section -->
+    <section id="contact" class="container">
+      <div class="section-header">
+        <span class="section-tag">Get In Touch</span>
+        <h2>Contact & Inquiries</h2>
+        <p>Have a question or want to discuss an opportunity? Send me a quick message below.</p>
+      </div>
+
+      <div class="contact-grid">
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="contactName">Your Name *</label>
+            <input type="text" id="contactName" name="name" placeholder="John Doe" required />
+          </div>
+
+          <div class="form-group">
+            <label for="contactEmail">Your Email Address *</label>
+            <input type="email" id="contactEmail" name="email" placeholder="john@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="contactMessage">Message *</label>
+            <textarea id="contactMessage" name="message" rows="5" placeholder="Hi Pavankalyan, I'd like to talk about..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="contactSubmitBtn">
+            <span>Send Message</span>
+          </button>
+        </form>
+
+        <div class="contact-info-card">
+          <div>
+            <h4>Direct Contact Information</h4>
+            <div class="info-item">
+              <div class="info-icon">✉️</div>
+              <div>
+                <div style="font-size: 0.78rem; color: var(--text-dim);">EMAIL ME</div>
+                <a href="mailto:bpavanqwe@gmail.com">bpavanqwe@gmail.com</a>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">📍</div>
+              <div>
+                <div style="font-size: 0.78rem; color: var(--text-dim);">LOCATION</div>
+                <span style="color: var(--text-main);">India (Remote Worldwide)</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">⚡</div>
+              <div>
+                <div style="font-size: 0.78rem; color: var(--text-dim);">LOOKING FOR A CUSTOM BUILD?</div>
+                <a href="javascript:void(0)" onclick="openBookingModal()" style="color: #34d399; font-weight: 600;">
+                  Click here to submit project requirements
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Connect on Socials</div>
+            <div class="social-links">
+              <a href="https://github.com/Bpavan124" target="_blank" rel="noopener" class="social-btn" title="GitHub">🐙</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-btn" title="LinkedIn">💼</a>
+              <a href="mailto:bpavanqwe@gmail.com" class="social-btn" title="Email">✉️</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       "Book a Project" Native Modal Dialog
+       ========================================================================== -->
+  <dialog id="bookingModal" class="booking-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><span>🚀</span> Book a Project / Submit Requirements</h3>
+        <button type="button" class="modal-close" onclick="closeBookingModal()" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="bookingForm">
+        <div class="modal-body">
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">
+            Fill in your project goals and requirements below. Your details will be formatted and <strong>automatically sent directly to Boddu Pavankalyan's email</strong> (<a href="mailto:bpavanqwe@gmail.com" style="color: var(--primary);">bpavanqwe@gmail.com</a>), and you will receive a confirmation receipt.
+          </p>
+
+          <span class="form-section-title">1. Client & Contact Details</span>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="clientName">Full Name *</label>
+              <input type="text" id="clientName" name="clientName" placeholder="e.g. Sarah Connor" required />
+            </div>
+            <div class="form-group">
+              <label for="clientEmail">Email Address *</label>
+              <input type="email" id="clientEmail" name="clientEmail" placeholder="e.g. sarah@company.com" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="clientPhone">Phone / WhatsApp</label>
+              <input type="tel" id="clientPhone" name="clientPhone" placeholder="+91 98765 43210" />
+            </div>
+            <div class="form-group">
+              <label for="company">Company / Organization</label>
+              <input type="text" id="company" name="company" placeholder="e.g. TechCorp / Freelance" />
+            </div>
+          </div>
+
+          <span class="form-section-title">2. Project Scope & Preferences</span>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="projectType">Service / Project Category *</label>
+              <select id="projectType" name="projectType" required>
+                <option value="Full-Stack Web Application">Full-Stack Web Application (Node + Frontend)</option>
+                <option value="Backend REST API & Architecture">Backend REST API & Architecture</option>
+                <option value="Database Design & Query Optimization">Database Design & Query Optimization (MySQL/MongoDB)</option>
+                <option value="Data Analytics & Python Dashboards">Data Analytics & Python Dashboards</option>
+                <option value="AI / ML Diagnostics Solution">AI / ML Diagnostics Solution</option>
+                <option value="DevOps & Environment Automation">DevOps & Environment Automation</option>
+                <option value="Other Custom Project">Other Custom Software</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="timeline">Expected Timeline</label>
+              <select id="timeline" name="timeline">
+                <option value="Urgent (< 2 weeks)">Urgent (&lt; 2 weeks)</option>
+                <option value="Standard (2 - 4 weeks)" selected>Standard (2 - 4 weeks)</option>
+                <option value="1 - 3 months">1 - 3 months</option>
+                <option value="Flexible / Ongoing">Flexible / Ongoing</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="estimatedBudget">Estimated Budget Range</label>
+              <select id="estimatedBudget" name="estimatedBudget">
+                <option value="Under $500 / ₹40,000">Under $500 / ₹40,000</option>
+                <option value="$500 - $1,500 / ₹40k - ₹1.2L" selected>$500 - $1,500 / ₹40,000 - ₹1,20,000</option>
+                <option value="$1,500 - $3,500 / ₹1.2L - ₹3L">$1,500 - $3,500 / ₹1,20,000 - ₹3,00,000</option>
+                <option value="$3,500+ / Custom Enterprise">$3,500+ / Enterprise</option>
+                <option value="To Be Discussed">To Be Discussed</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="deadline">Target Launch Date</label>
+              <input type="date" id="deadline" name="deadline" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="techPreferences">Preferred Technologies / Frameworks (Optional)</label>
+            <input type="text" id="techPreferences" name="techPreferences" placeholder="e.g. Node.js, Express, MySQL, React, Python" />
+          </div>
+
+          <span class="form-section-title">3. Detailed Project Requirements *</span>
+          <div class="form-group">
+            <label for="projectRequirements">Describe Your Requirements, Features, and Goals *</label>
+            <textarea id="projectRequirements" name="projectRequirements" rows="5" placeholder="Please describe what you want built: key user roles, required API endpoints, database needs, third-party integrations, or reference links..." required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeBookingModal()">Cancel</button>
+          <button type="submit" class="btn btn-book" id="bookingSubmitBtn">
+            <span>🚀 Submit Project Requirements</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Boddu Pavankalyan. All rights reserved. | Built with Node.js, Express, and Modern Web Standards.</p>
+    <p style="margin-top: 8px;">
+      <a href="mailto:bpavanqwe@gmail.com">bpavanqwe@gmail.com</a> • <a href="https://github.com/Bpavan124" target="_blank" rel="noopener">GitHub Profile</a>
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
